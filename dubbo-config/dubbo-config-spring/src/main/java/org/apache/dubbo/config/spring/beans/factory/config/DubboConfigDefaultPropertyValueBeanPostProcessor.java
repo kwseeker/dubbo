@@ -55,6 +55,7 @@ public class DubboConfigDefaultPropertyValueBeanPostProcessor extends GenericBea
 
     @Override
     protected void processBeforeInitialization(AbstractConfig dubboConfigBean, String beanName) throws BeansException {
+        System.out.println(">>>>>>>>>> DubboConfigDefaultPropertyValueBeanPostProcessor#processBeforeInitialization()");
         // ignore auto generate bean name
         if (!beanName.contains("#")) {
             // [Feature] https://github.com/apache/dubbo/issues/5721

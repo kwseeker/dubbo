@@ -62,6 +62,10 @@ public class ReferenceBeanManager implements ApplicationContextAware {
     private volatile boolean initialized = false;
     private ModuleModel moduleModel;
 
+    public ReferenceBeanManager() {
+        System.out.println(">>>>>>>>>>> new ReferenceBeanManager()");
+    }
+
     public void addReference(ReferenceBean referenceBean) throws Exception {
         String referenceBeanName = referenceBean.getId();
         Assert.notEmptyString(referenceBeanName, "The id of ReferenceBean cannot be empty");

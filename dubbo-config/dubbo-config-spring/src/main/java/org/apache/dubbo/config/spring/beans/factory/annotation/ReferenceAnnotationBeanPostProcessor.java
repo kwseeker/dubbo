@@ -136,6 +136,7 @@ public class ReferenceAnnotationBeanPostProcessor extends AbstractAnnotationBean
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        System.out.println(">>>>>>>>>>>>>>> ReferenceAnnotationBeanPostProcessor#postProcessBeanFactory()");
 
         String[] beanNames = beanFactory.getBeanDefinitionNames();
         for (String beanName : beanNames) {
@@ -314,6 +315,7 @@ public class ReferenceAnnotationBeanPostProcessor extends AbstractAnnotationBean
 
     @Override
     public void postProcessMergedBeanDefinition(RootBeanDefinition beanDefinition, Class<?> beanType, String beanName) {
+        System.out.println(">>>>>>>>>>>>>>> ReferenceAnnotationBeanPostProcessor#postProcessMergedBeanDefinition(), beanName=" + beanName);
         if (beanType != null) {
             if (isReferenceBean(beanDefinition)) {
                 // mark property value as optional
@@ -355,6 +357,7 @@ public class ReferenceAnnotationBeanPostProcessor extends AbstractAnnotationBean
     @Override
     public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName)
             throws BeansException {
+        System.out.println(">>>>>>>>>>>>>>> ReferenceAnnotationBeanPostProcessor#postProcessProperties(), beanName=" + beanName);
         try {
             AnnotatedInjectionMetadata metadata = findInjectionMetadata(beanName, bean.getClass(), pvs);
             prepareInjection(metadata);

@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ExtensionLoader_Activate_Test {
@@ -33,6 +34,25 @@ public class ExtensionLoader_Activate_Test {
         ExtensionLoader<ActivateExt1> loader = ExtensionLoader.getExtensionLoader(ActivateExt1.class);
         List<ActivateExt1> list = loader.getActivateExtension(url, new String[] {}, "onClass");
 
-        assertTrue(list == null || list.size() == 0);
+        //assertTrue(list == null || list.size() == 0);
+        assertEquals(1, list.size());
+
+        /**
+         * group=org.apache.dubbo.common.extension.activate.impl.GroupActivateExtImpl
+         * value=org.apache.dubbo.common.extension.activate.impl.ValueActivateExtImpl
+         * order1=org.apache.dubbo.common.extension.activate.impl.OrderActivateExtImpl1
+         * order2=org.apache.dubbo.common.extension.activate.impl.OrderActivateExtImpl2
+         * onClassExt=org.apache.dubbo.common.extension.activate.impl.ActivateOnClassExt1Impl
+         */
+        List<ActivateExt1> allList = loader.getActivateExtensions();
+        assertEquals(5, allList.size());
+    }
+
+    @Test
+    void testActiveByValue() {
+        ExtensionLoader<ActivateExt1> loader = ExtensionLoader.getExtensionLoader(ActivateExt1.class);
+
+        URL url = URL.valueOf("test://localhost/test?keyA=value");
+        List<ActivateExt1> list2 = loader.getActivateExtension(url, "keyA", "value");
     }
 }

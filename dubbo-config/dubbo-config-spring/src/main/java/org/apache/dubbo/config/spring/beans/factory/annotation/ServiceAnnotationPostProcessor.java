@@ -164,17 +164,20 @@ public class ServiceAnnotationPostProcessor
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        System.out.println(">>>>>>>>>> ServiceAnnotationPostProcessor#afterPropertiesSet()");
         this.resolvedPackagesToScan = resolvePackagesToScan(packagesToScan);
     }
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+        System.out.println(">>>>>>>>>> ServiceAnnotationPostProcessor#postProcessBeanDefinitionRegistry()");
         this.registry = registry;
         scanServiceBeans(resolvedPackagesToScan, registry);
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        System.out.println(">>>>>>>>>> ServiceAnnotationPostProcessor#postProcessBeanFactory()");
         if (this.registry == null) {
             // In spring 3.x, may be not call postProcessBeanDefinitionRegistry()
             this.registry = (BeanDefinitionRegistry) beanFactory;

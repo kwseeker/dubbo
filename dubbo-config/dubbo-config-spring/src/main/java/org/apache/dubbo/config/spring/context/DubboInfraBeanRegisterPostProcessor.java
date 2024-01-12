@@ -55,11 +55,13 @@ public class DubboInfraBeanRegisterPostProcessor
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+        System.out.println(">>>>>>>>>>> DubboInfraBeanRegisterPostProcessor#postProcessBeanDefinitionRegistry()");
         this.registry = registry;
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        System.out.println(">>>>>>>>>>> DubboInfraBeanRegisterPostProcessor#postProcessBeanFactory()");
 
         // In Spring 3.2.x, registry may be null because do not call postProcessBeanDefinitionRegistry method before
         // postProcessBeanFactory

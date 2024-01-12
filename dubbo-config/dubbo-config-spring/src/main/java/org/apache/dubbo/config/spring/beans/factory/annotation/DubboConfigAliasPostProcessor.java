@@ -45,6 +45,7 @@ public class DubboConfigAliasPostProcessor implements BeanDefinitionRegistryPost
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+        System.out.println(">>>>>>>>>>>>> DubboConfigAliasPostProcessor#postProcessBeanDefinitionRegistry()");
         this.registry = registry;
     }
 
@@ -61,6 +62,7 @@ public class DubboConfigAliasPostProcessor implements BeanDefinitionRegistryPost
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println(">>>>>>>>>>>>> DubboConfigAliasPostProcessor#postProcessAfterInitialization() beanName=" + beanName);
         if (bean instanceof AbstractConfig) {
             String id = ((AbstractConfig) bean).getId();
             if (hasText(id) // id MUST be present in AbstractConfig

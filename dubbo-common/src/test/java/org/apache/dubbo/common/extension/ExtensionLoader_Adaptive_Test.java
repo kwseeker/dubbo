@@ -18,6 +18,7 @@ package org.apache.dubbo.common.extension;
 
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.adaptive.HasAdaptiveExt;
+import org.apache.dubbo.common.extension.adaptive.impl.HasAdaptiveExtImpl1;
 import org.apache.dubbo.common.extension.adaptive.impl.HasAdaptiveExt_ManualAdaptive;
 import org.apache.dubbo.common.extension.ext1.SimpleExt;
 import org.apache.dubbo.common.extension.ext2.Ext2;
@@ -49,8 +50,13 @@ class ExtensionLoader_Adaptive_Test {
     @Test
     void test_useAdaptiveClass() throws Exception {
         ExtensionLoader<HasAdaptiveExt> loader = ExtensionLoader.getExtensionLoader(HasAdaptiveExt.class);
+        //获取自适应拓展类实例
         HasAdaptiveExt ext = loader.getAdaptiveExtension();
         assertTrue(ext instanceof HasAdaptiveExt_ManualAdaptive);
+        HasAdaptiveExt ext1 = loader.getExtension("adaptive");    //不能通过 adaptive 获取自适应拓展类实例, cachedInstances没有保存自适应拓展类实例
+        assertNull(ext1);
+        HasAdaptiveExt ext2 = loader.getExtension("impl1");
+        assertTrue(ext2 instanceof HasAdaptiveExtImpl1);
     }
 
     @Test

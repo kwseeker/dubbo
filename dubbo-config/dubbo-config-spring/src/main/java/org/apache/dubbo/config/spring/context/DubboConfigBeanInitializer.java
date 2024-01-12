@@ -79,6 +79,7 @@ public class DubboConfigBeanInitializer implements BeanFactoryAware, Initializin
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        System.out.println(">>>>>>>>>>> DubboConfigBeanInitializer#afterPropertiesSet()");
         init();
     }
 

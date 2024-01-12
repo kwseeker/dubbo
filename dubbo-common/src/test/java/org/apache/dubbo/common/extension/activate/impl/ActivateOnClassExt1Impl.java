@@ -21,7 +21,9 @@ import org.apache.dubbo.common.extension.activate.ActivateExt1;
 
 @Activate(
         group = {"onClass"},
-        onClass = "org.springframework.security.core.context.SecurityContextHolder")
+        //onClass = "org.springframework.security.core.context.SecurityContextHolder"
+        onClass = "org.apache.dubbo.common.extension.activate.ActivateExt1"
+)
 public class ActivateOnClassExt1Impl implements ActivateExt1 {
     @Override
     public String echo(String msg) {

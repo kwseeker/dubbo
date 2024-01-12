@@ -21,13 +21,12 @@ dubbo:
   application:
     name: dubbo-springboot-demo-provider
   protocol:
-    name: tri
-    host: localhost
-    port: 50052
-#    name: dubbo
-##    host: 127.0.0.1
+#    name: tri
+#    host: localhost
 #    port: 50052
+    name: dubbo
+#    host: 127.0.0.1
+    port: 50052
   registry:
     #address: zookeeper://${zookeeper.address:127.0.0.1}:2181
     address: nacos://${nacos.address:127.0.0.1}:8848
-
