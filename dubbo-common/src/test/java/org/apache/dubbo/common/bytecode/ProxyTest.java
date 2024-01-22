@@ -26,7 +26,7 @@ import org.junit.jupiter.api.condition.JRE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-@DisabledForJreRange(min = JRE.JAVA_16)
+//@DisabledForJreRange(min = JRE.JAVA_16)
 class ProxyTest {
 
     @Test

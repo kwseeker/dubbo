@@ -20,6 +20,10 @@ import org.apache.dubbo.common.utils.ArrayUtils;
 import org.apache.dubbo.common.utils.ReflectUtils;
 import org.apache.dubbo.common.utils.StringUtils;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -360,6 +364,7 @@ public final class ClassGenerator {
             }
 
             try {
+                writeBytecode2File();
                 return mPool.toClass(mCtc, neighborClass, loader, pd);
             } catch (Throwable t) {
                 if (!(t instanceof CannotCompileException)) {
@@ -371,6 +376,25 @@ public final class ClassGenerator {
             throw e;
         } catch (NotFoundException | CannotCompileException e) {
             throw new RuntimeException(e.getMessage(), e);
+        }
+    }
+
+    private void writeBytecode2File() throws CannotCompileException {
+        File outputDir = new File("generated");
+        if (!outputDir.exists()) {
+            outputDir.mkdirs();
+        }
+        File generatedClassFile = new File("generated", this.mClassName + ".class");
+        if (generatedClassFile.exists()) {
+            return;
+        }
+
+        try (FileOutputStream fos = new FileOutputStream(new File("generated", this.mClassName+".class"));
+             DataOutputStream dos = new DataOutputStream(fos)) {
+            byte[] bytecode = mCtc.toBytecode();
+            dos.write(bytecode);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

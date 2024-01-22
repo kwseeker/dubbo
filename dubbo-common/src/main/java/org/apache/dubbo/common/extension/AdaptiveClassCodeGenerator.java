@@ -228,14 +228,17 @@ public class AdaptiveClassCodeGenerator {
         if (adaptiveAnnotation == null) {
             return generateUnsupported(method);
         } else {
+            //获取URL类型参数的索引
             int urlTypeIndex = getUrlTypeIndex(method);
 
             // found parameter in URL type
             if (urlTypeIndex != -1) {
                 // Null Point check
+                // 参数列表中有URL类型参数
                 code.append(generateUrlNullCheck(urlTypeIndex));
             } else {
                 // did not find parameter in URL type
+                // 参数列表中没有URL类型参数
                 code.append(generateUrlAssignmentIndirectly(method));
             }
 
